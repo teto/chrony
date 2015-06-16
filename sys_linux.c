@@ -361,6 +361,9 @@ SYS_Linux_Initialise(void)
     have_setoffset = 0;
   }
 
+  /*
+  
+  */
   SYS_Generic_CompleteFreqDriver(1.0e6 * max_tick_bias / nominal_tick,
                                  1.0 / tick_update_hz,
                                  read_frequency, set_frequency,
@@ -444,6 +447,7 @@ void SYS_Linux_SetScheduler(int SchedPriority)
     else if ( SchedPriority < pmin ) {
       sched.sched_priority = pmin;
     }
+    /* syscall manpage gives little info */
     if ( sched_setscheduler(0, SCHED_FIFO, &sched) == -1 ) {
       LOG(LOGS_ERR, LOGF_SysLinux, "sched_setscheduler() failed");
     }
